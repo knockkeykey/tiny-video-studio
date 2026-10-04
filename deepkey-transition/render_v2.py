@@ -15,6 +15,7 @@ GREEN = np.array([0, 1, 0], np.float32)
 KEY_POS = (175, 0)
 DEEP_POS = (-330, 38)
 ICON_POS = (-240, 215)
+CENTER_DX = 95  # 整组画面右移，使静止时视觉居中（屏幕像素）
 
 # 转场色带
 BAND_W = 3600
@@ -47,7 +48,7 @@ def camera(t):
     breath = 1.3 * lerp(0.97, 1.03, sine_io(seg(t, 0.0, 1.8)))  # 缓慢推近
     z = seg(t, 1.75, 2.15) ** 3                                   # 末段加速冲镜头
     s = breath * lerp(1.0, 3.0, z)
-    return M_t(W / 2 - 120 * z, H / 2 - 30 + 40 * z) @ M_s(s) @ M_t(-KEY_POS[0] * z * 0.35, 0) @ SHEAR
+    return M_t(W / 2 + CENTER_DX - 120 * z, H / 2 - 30 + 40 * z) @ M_s(s) @ M_t(-KEY_POS[0] * z * 0.35, 0) @ SHEAR
 
 
 def icon_matrix(t):
@@ -133,8 +134,8 @@ def main():
         acc /= SUB
         a = acc[..., 3:4]
         p_g.stdin.write((np.clip(acc[..., :3] + GREEN * (1 - a), 0, 1) * 255 + 0.5).astype(np.uint8).tobytes())
-        straight = np.where(a > 1e-4, acc[..., :3] / np.maximum(a, 1e-4), 0)
-        p_a.stdin.write((np.clip(np.concatenate([straight, a], 2), 0, 1) * 255 + 0.5).astype(np.uint8).tobytes())
+        # 预乘 alpha：剪辑软件按预乘解读时边缘不会发白
+        p_a.stdin.write((np.clip(np.concatenate([acc[..., :3], a], 2), 0, 1) * 255 + 0.5).astype(np.uint8).tobytes())
         print(f"\rframe {i + 1}/{N_FRAMES}", end="", flush=True)
     for p in (p_g, p_a):
         p.stdin.close()

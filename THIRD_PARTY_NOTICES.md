@@ -6,7 +6,7 @@
 | --- | --- | --- | --- |
 | Poppins BoldItalic、Bold（字体内版本 4.004） | 简易角标、素材来源角标的英文 | [Poppins](https://github.com/itfoundry/Poppins)、[Google Fonts](https://github.com/google/fonts/tree/main/ofl/poppins) | 两个目录中的 `fonts/OFL-Poppins.txt` |
 | Source Han Sans CN Bold、Heavy | 两套角标的中文 | [Adobe Source Han Sans](https://github.com/adobe-fonts/source-han-sans) | 两个目录中的 `fonts/OFL-SourceHanSans.txt` |
-| Smiley Sans Oblique（得意黑，字体内版本 1.0.0） | DeepKey 过场动画 | [atelierAnchor / Smiley Sans](https://github.com/atelier-anchor/smiley-sans) | `deepkey-transition/fonts/OFL-SmileySans.txt` |
+| Smiley Sans Oblique（得意黑，字体内版本 1.0.0） | DeepKey 过场动画、简易角标、素材来源角标 | [atelierAnchor / Smiley Sans](https://github.com/atelier-anchor/smiley-sans) | 三个目录中的 `fonts/OFL-SmileySans.txt` |
 
 Poppins 字体内版权声明：Copyright 2020 The Poppins Project Authors (https://github.com/itfoundry/Poppins)。
 

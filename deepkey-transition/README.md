@@ -24,7 +24,7 @@ python deepkey-transition/render_v2.py
 | `DeepKey过场_v2_绿幕_1080p60.mp4` | 同尺寸、帧率和时长；H.264 绿幕视频，AAC 音轨 |
 | `DeepKey过场_v2_音效.wav` | 48kHz、24-bit、立体声、3.7 秒；含混响尾巴 |
 
-视频内音效裁至 2.5 秒，并在末尾 0.12 秒淡出。独立 WAV 保留较长尾音，适合在剪辑软件中自行控制。MOV 使用 Straight / 非预乘 alpha；若剪辑软件需要手动指定透明通道模式，选择 Straight。MP4 本身不带透明通道，需要抠绿。
+视频内音效裁至 2.5 秒，并在末尾 0.12 秒淡出。独立 WAV 保留较长尾音，适合在剪辑软件中自行控制。MOV 使用预乘（Premultiplied）alpha；若剪辑软件需要手动指定透明通道模式，选择 Premultiplied，选 Straight 会导致边缘发白。MP4 本身不带透明通道，需要抠绿。
 
 ## 修改
 

@@ -34,6 +34,6 @@ python source-credit/render.py "示例作者"
 
 ## 文件与字体
 
-`render.py` 为完整动画脚本。`fonts` 包含 SourceHanSansCN Heavy（标题）、Bold（中文署名）、Poppins Bold（英文署名）及两份 OFL 许可证。无需安装系统字体或提供参考 PNG。
+`render.py` 为完整动画脚本。`fonts` 包含得意黑 Smiley Sans Oblique（标题与署名通用）及 OFL 许可证。无需安装系统字体或提供参考 PNG。
 
-源码采用[项目 MIT 许可证](../LICENSE)，字体许可证见 `fonts/OFL-Poppins.txt`、`fonts/OFL-SourceHanSans.txt`。
+源码采用[项目 MIT 许可证](../LICENSE)，字体许可证见 `fonts/OFL-SmileySans.txt`。

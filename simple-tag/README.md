@@ -33,6 +33,6 @@ python simple-tag/render.py "示例文字" center
 
 ## 文件与字体
 
-`render.py` 为完整动画脚本，`fonts` 含 Poppins BoldItalic、SourceHanSansCN Bold 及两份 OFL 许可证。字体从本目录读取，无需安装系统字体，也无需另一套角标目录或参考 PNG。
+`render.py` 为完整动画脚本，`fonts` 含得意黑 Smiley Sans Oblique（中英文通用）及 OFL 许可证。字体从本目录读取，无需安装系统字体，也无需另一套角标目录或参考 PNG。
 
-源码采用[项目 MIT 许可证](../LICENSE)，字体许可证见 `fonts/OFL-Poppins.txt`、`fonts/OFL-SourceHanSans.txt`。
+源码采用[项目 MIT 许可证](../LICENSE)，字体许可证见 `fonts/OFL-SmileySans.txt`。

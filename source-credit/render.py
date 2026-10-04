@@ -24,15 +24,12 @@ BLUE = (30, 110, 255)
 BAND = (18, 18, 20, 225)
 WHITE = (255, 255, 255, 255)
 
-# 字体均为 SIL OFL 开源授权，可免费商用：思源黑体(fonts/) + Poppins
+# 字体为 SIL OFL 开源授权，可免费商用：得意黑 Smiley Sans Oblique，中英文通用
 FONT_DIR = os.path.join(HERE, "fonts")
-CN_TITLE = os.path.join(FONT_DIR, "SourceHanSansCN-Heavy.otf")
-CN_BODY = os.path.join(FONT_DIR, "SourceHanSansCN-Bold.otf")
-F_CN = ImageFont.truetype(CN_TITLE, int(52 * K * SS))
-# 署名含中日韩字符时 Poppins 没有字形(会显示成方框)，改用思源黑体
+SMILEY = os.path.join(FONT_DIR, "SmileySans-Oblique.ttf")
+F_CN = ImageFont.truetype(SMILEY, int(52 * K * SS))
 _HAS_CJK = any("\u2e80" <= ch <= "\u9fff" or "\uff00" <= ch <= "\uffef" for ch in NAME)
-F_EN = (ImageFont.truetype(CN_BODY, int(38 * K * SS)) if _HAS_CJK
-        else ImageFont.truetype(os.path.join(FONT_DIR, "Poppins-Bold.ttf"), int(40 * K * SS)))
+F_EN = ImageFont.truetype(SMILEY, int(40 * K * SS))
 
 # 局部画布(参考图坐标系)尺寸
 LW, LH = int(698 * K * SS), int(256 * K * SS)

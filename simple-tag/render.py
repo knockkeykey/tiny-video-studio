@@ -23,11 +23,10 @@ BAND = (22, 22, 24, 180)    # 参考图里暗条约 65-70% 不透明，透出底
 RED = (30, 110, 255, 255)   # 蓝箭头，和素材来源角标的蓝钥匙同色 #1E6EFF
 WHITE = (255, 255, 255, 255)
 
-# 字体 SIL OFL 可免费商用：Poppins BoldItalic(英文) / 思源黑体 Bold + 仿斜体(中文)
+# 字体 SIL OFL 可免费商用：得意黑 Smiley Sans Oblique，中英文通用(中文另做仿斜)
 FONT_DIR = os.path.join(HERE, "fonts")
 _HAS_CJK = any("⺀" <= ch <= "鿿" or "＀" <= ch <= "￯" for ch in TEXT)
-FONT = (ImageFont.truetype(os.path.join(FONT_DIR, "SourceHanSansCN-Bold.otf"), int(34 * K * SS)) if _HAS_CJK
-        else ImageFont.truetype(os.path.join(FONT_DIR, "Poppins-BoldItalic.ttf"), int(36 * K * SS)))
+FONT = ImageFont.truetype(os.path.join(FONT_DIR, "SmileySans-Oblique.ttf"), int(36 * K * SS))
 
 
 def P(x, y):  # 参考坐标 -> 超采样局部像素
@@ -58,7 +57,7 @@ def text_img(text, font):
     pad = int(6 * K * SS)
     im = Image.new("RGBA", (r - l + pad * 2, b - t + pad * 2), (0, 0, 0, 0))
     ImageDraw.Draw(im).text((pad - l, pad - t), text, font=font, fill=WHITE)
-    if _HAS_CJK:  # 中文字体没有斜体，水平错切 ~12° 仿斜
+    if _HAS_CJK:  # 得意黑只有英文是斜体，中文字形基本直立，水平错切 ~12° 仿斜
         sh = 0.21
         w2 = int(im.width + im.height * sh)
         im = im.transform((w2, im.height), Image.AFFINE, (1, sh, -im.height * sh, 0, 1, 0), Image.BICUBIC)
@@ -70,13 +69,14 @@ TEXT_X, TEXT_CY = 57, 74            # 参考图：文字左缘 x=57，竖直中�
 tw_ref = (T_TEXT.width - 2 * _PAD) / (K * SS)
 R = TEXT_X + tw_ref                 # 文字右缘(参考坐标)，暗条/箭头按文字宽度自适应
 
-# 暗条：左边 "/" 斜切，右边箭头尖 (参考图 y=26..126，尖在 y≈74)
-TOP, MID, BOT = 26, 74, 126
-BAND_POLY = [P(57, TOP), P(R, TOP), P(R + 27, MID), P(R + 15, BOT), P(27, BOT)]
+# 暗条：左边 "/" 斜切，右边是跟斜体同向倾斜的箭头尖 (参考图 y=26..126，尖在 y≈72)
+# 参考图右端：上角 x=622、尖 x=650、下角 x=604，下边比上边短，两条斜边与蓝箭头平行
+TOP, MID, BOT = 26, 72, 126
+BAND_POLY = [P(57, TOP), P(R, TOP), P(R + 28, MID), P(R - 18, BOT), P(27, BOT)]
 # 文字遮罩：比暗条略宽，滑入时只在暗条范围内出现
 TEXT_CLIP = [P(57, 0), P(R + 60, 0), P(R + 60, 162), P(20, 162)]
-# 蓝色 V 形箭头(粗)：外沿尖 x≈R+85，内沿尖 x≈R+56
-CHEV = [P(R + 32, 18), P(R + 54, 18), P(R + 85, 72), P(R + 50, 126), P(R + 22, 126), P(R + 56, 72)]
+# 蓝色 V 形箭头(粗，同样倾斜)：外沿尖 x≈R+86，内沿尖 x≈R+57
+CHEV = [P(R + 27, 20), P(R + 55, 20), P(R + 86, 72), P(R + 42, 125), P(R + 10, 125), P(R + 57, 72)]
 LW, LH = int((R + 110) * K * SS), int(162 * K * SS)
 
 
@@ -105,7 +105,7 @@ def frame(t):
     # 1. 暗条：箭头尖带着暗条从左往右伸出 (0.05 - 0.55s)
     pb = expo_out(seg(t, 0.05, 0.55))
     if pb > 0:
-        full_w = (R + 27 - 27) * K * SS
+        full_w = (R + 28 - 27) * K * SS
         dx = -(1 - pb) * full_w
         layer = poly_layer(BAND_POLY, BAND, dx)
         m = Image.new("L", (LW, LH), 0)   # 左端斜边不动，只露出 >= 左斜边的部分
